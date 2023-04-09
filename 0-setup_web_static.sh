@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-<<<<<<< HEAD
 # Sets up my Nginx web servers for deployment
 
 apt-get update
