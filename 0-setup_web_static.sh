@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Sets up my Nginx web servers for deployment
 
-apt-get update
-apt-get install -y nginx
+sudo apt-get -y update
+sudo apt-get install -y nginx
 
 if NOTEXISTS
 	mkdir -p /data/web_static/releases/test/
@@ -13,7 +13,7 @@ if NOTEXISTS
 	chown -R ubuntu /data/
 	chgrp -R ubuntu /data/
 
-	printf %s "server {
+	printf "%s" server {
 		listen 80 default_server;
 		listen [::]:80 default_server;
 		add_header X-Served-By $HOSTNAME;
@@ -31,7 +31,7 @@ if NOTEXISTS
 			root /var/www/html;
 			internal;
 		}
-}" > /etc/nginx/sites-available/default
+} > /etc/nginx/sites-available/default
 
 service nginx restart
 =======
@@ -46,4 +46,4 @@ sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -hR ubuntu:ubuntu /data/
 sudo sed -i '38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
 sudo service nginx start
->>>>>>> 2f69f1f768f71ed5b03ce99c9d9c39884d352c42
+
